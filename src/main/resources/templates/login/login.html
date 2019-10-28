@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <title>そらガイド 空港管理-ログイン</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="login">
+    <div class="header">
+        <h1>そらガイド</h1>
+        <h1>空港管理システム</h1>
+    </div>
+    <form name='form-login' role="form" id="form-login" th:action="@{'/loginProcess'}" method="post">
+        <p th:text="${message}" style="color: black"></p>
+        <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+        th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+        class="text-danger">ログインエラーメッセージ</p>
+
+        <span><i class="material-icons">perm_identity</i></span>
+        <input type="text" name="username" autofocus="autofocus" placeholder="ユーザー"/>
+        <br/>
+        <span><i class="material-icons">lock</i></span>
+        <input type="password" name="password" placeholder="パスワード"/>
+        <br/>
+        <input type="submit" value ="ログイン"/>
+        <br/>
+        <div class="test">
+            <a th:href="@{'./login/reset'}">パスワードをお忘れの方はこちら</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

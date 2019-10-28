@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- TODO テスト用のため消す-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>そらガイド 空港管理-ユーザー登録</title>
+</head>
+<body class="text-center">
+    <section th:object="${signUpForm}">
+        <h1>ユーザー登録</h1>
+        <br/>
+        <form role="form" id="signup" th:action="@{/sign-up}" method="post">
+            <input type="text" th:field="*{username}" autofocus="autofocus" placeholder="ユーザー" />
+            <br/>
+            <input type="password" th:field="*{password}" placeholder="パスワード" />
+            <br/>
+            <br/>
+            <button type="submit">サインアップ</button>
+        </form>
+    </section>
+</body>
+</html>
