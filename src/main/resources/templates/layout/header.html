@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <header th:fragment="leftNavigation">
+            <ul>
+                <form name="list" role="form" th:action="@{/reservation/list}" method="get">
+                    <li>
+                        <a href="javascript:document.list.submit()">予約一覧</a>
+                    </li>
+                </form>
+                <form name="companySetting" role="form" th:action="@{/company/setting}" method="get">
+                    <li>
+                        <a href="javascript:document.companySetting.submit()">会社設定</a>
+                    </li>
+                </form>
+                <form name="userSetting" role="form" th:action="@{/user/setting}" method="get">
+                    <li>
+                        <a href="javascript:document.userSetting.submit()">パスワード変更</a>
+                    </li>
+                </form>
+                <form name="logout" role="form" th:action="@{/logout}" method="post">
+                    <li>
+                        <a href="javascript:document.logout.submit()">ログアウト</a>
+                    </li>
+                </form>
+            </ul>
+        </header>
+    </body>
+</html>

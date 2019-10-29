@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
@@ -8,6 +10,7 @@
     <title>そらガイド 空港管理-ホーム</title>
 </head>
 <body>
-    <a th:href="@{'./logout'}">ログアウト</a>
+    <section layout:fragment="content">
+    </section>
 </body>
 </html>
