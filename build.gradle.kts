@@ -57,6 +57,14 @@ dependencies {
 	 */
 	implementation("org.springframework.retry:spring-retry")
 	implementation("org.springframework.boot:spring-boot-starter-aop")
+
+	/**
+	 * SendGrid
+	 */
+	// https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java
+	implementation("com.sendgrid:sendgrid-java:4.4.1")
+
+
 }
 
 tasks.withType<KotlinCompile> {
