@@ -23,7 +23,9 @@ import java.util.*
 class UserService(
         private val userRepository: UserRepository,
         private val airportCompanyService: AirportCompanyService,
-        private val passwordEncoder: PasswordEncoder
+        private val passwordEncoder: PasswordEncoder,
+        private val sendMailService: SendMailService,
+        private val airportCompanyRepository: AirportCompanyRepository
 ) : UserDetailsService {
 
     @Throws(UsernameNotFoundException::class, LockedException::class)
@@ -49,6 +51,18 @@ class UserService(
 
         return User(userEntity, getAuthorities(userEntity))
     }
+
+    // ユーザー取得
+    @Transactional
+    @Retryable(value = [Exception::class], maxAttempts = 3, backoff = Backoff(delay = 1000))
+    fun findByCompanyIdAndUsername(companyId: String, username: String): Boolean {
+        if (!airportCompanyRepository.findById(companyId).isPresent) {
+            // タクシー会社が見つからない場合は処理終了
+            return false
+        }
+        return true
+    }
+
 
     // アクセス権限の取得
     private fun getAuthorities(userEntity: UserEntity): Collection<GrantedAuthority> {
@@ -122,7 +136,7 @@ class UserService(
         // ユーザ情報の更新
         userRepository.save(user)
 
-        // TO DO メール送信を実装
+        sendMailService.sendAccountResetMail(userName, newPassword, companyInfo.companyName, companyInfo.companyMail)
 
         return 0
     }

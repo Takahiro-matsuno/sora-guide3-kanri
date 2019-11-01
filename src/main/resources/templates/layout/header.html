@@ -7,7 +7,7 @@
             <ul>
                 <form name="list" role="form" th:action="@{/reservation/list}" method="get">
                     <li>
-                        <a href="javascript:document.list.submit()">予約一覧</a>
+                        <a href="javascript:document.list.submit()">タクシー会社一覧</a>
                     </li>
                 </form>
                 <form name="companySetting" role="form" th:action="@{/company/setting}" method="get">
@@ -15,7 +15,7 @@
                         <a href="javascript:document.companySetting.submit()">会社設定</a>
                     </li>
                 </form>
-                <form name="userSetting" role="form" th:action="@{/user/setting}" method="get">
+                <form name="userSetting" role="form" th:action="@{/changePassword}" method="get">
                     <li>
                         <a href="javascript:document.userSetting.submit()">パスワード変更</a>
                     </li>
