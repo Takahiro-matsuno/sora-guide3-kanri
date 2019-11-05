@@ -1,5 +1,6 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.domain.service
 
+import jp.co.jalinfotec.soraguide.airportmaintenance.application.form.UserForm
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.`object`.User
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.UserEntity
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.AirportCompanyRepository
@@ -86,6 +87,35 @@ class UserService(
             return false
         }
     }
+
+    /**
+     * パスワード変更
+     */
+    @Transactional
+    @Retryable(value = [Exception::class], maxAttempts = 3, backoff = Backoff(delay = 1000))
+    fun changePassword(user: User,usForm: UserForm): Boolean {
+
+        val companyId =user.getCompanyId()
+
+        if(!airportCompanyRepository.findById(companyId).isPresent) {
+            // 空港会社が見つからない場合は処理終了
+            return false
+        }
+
+        // ユーザー取得、見つからない場合は処理終了
+        val userRepo =userRepository.findByCompanyIdAndUsername(companyId,user.username) ?: return false
+
+        return if (passwordEncoder.matches(usForm.nowPassword, userRepo.password)) {
+
+            userRepo.password = passwordEncoder.encode(usForm.newPassword)
+            userRepository.save(userRepo)
+            return true
+        } else {
+            false
+        }
+    }
+
+
 
     /**
      * ユーザ情報の取得

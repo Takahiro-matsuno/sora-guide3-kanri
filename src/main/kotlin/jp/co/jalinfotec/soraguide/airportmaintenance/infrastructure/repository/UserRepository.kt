@@ -9,4 +9,5 @@ import java.util.*
 interface UserRepository: JpaRepository<UserEntity, Long> {
 
     fun findByUsername(username: String): Optional<UserEntity>
+    fun findByCompanyIdAndUsername(companyId: String, userName: String): UserEntity?
 }
