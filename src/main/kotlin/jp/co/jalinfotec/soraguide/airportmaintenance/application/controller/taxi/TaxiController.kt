@@ -36,7 +36,6 @@ class TaxiController(
         if(companyIdList.any()) {
             //タクシー会社IDのリストが取得できた場合のみ
             for(companyId in companyIdList) {
-                val aaa = companyId.taxiId
                 val company = taxiCompanyRepository.findById(companyId.taxiId)
 
                 if(company.isPresent) {
@@ -44,7 +43,7 @@ class TaxiController(
                }
             }
         }
-        mav.addObject("taxiCompanyList",taxiCompanyList)
+        mav.addObject("taxiList",taxiCompanyList)
 
         //画面を表示
         return "taxi/taxi-list"

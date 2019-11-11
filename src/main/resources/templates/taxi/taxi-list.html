@@ -12,9 +12,19 @@
         <h1>タクシー会社一覧</h1>
         <hr noshade/>
         <p th:text="${errorMessage}"></p>
-
-
-
+        <table rules="rows">
+            <tr>
+                <th>会社名</th>
+                <th>電話番号</th>
+                <th>メールアドレス</th>
+            </tr>
+            <tr th:each="taxi :${taxiList}">
+                <p>aaa</p>
+                <td th:text="${taxi.companyName}"></td>
+                <td th:text="${taxi.contact}"></td>
+                <td th:text="${taxi.companyMail}"></td>
+            </tr>
+        </table>
     </div>
 </section>
 </body>
