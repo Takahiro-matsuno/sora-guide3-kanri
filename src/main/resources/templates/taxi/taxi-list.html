@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/layout">
 <head>
@@ -11,18 +13,21 @@
     <div class="content">
         <h1>タクシー会社一覧</h1>
         <hr noshade/>
+
         <p th:text="${errorMessage}"></p>
+        <button type="button" onclick="location.href='/taxi/add'">追加</button>
+        <br/>
+        <button type="button">削除</button>
         <table rules="rows">
             <tr>
                 <th>会社名</th>
                 <th>電話番号</th>
                 <th>メールアドレス</th>
             </tr>
-            <tr th:each="taxi :${taxiList}">
-                <p>aaa</p>
-                <td th:text="${taxi.companyName}"></td>
-                <td th:text="${taxi.contact}"></td>
-                <td th:text="${taxi.companyMail}"></td>
+            <tr th:each="taxi : ${taxiCompanyList}" th:object="${taxi}">
+                <td th:text="*{companyName}"></td>
+                <td th:text="*{contact}"></td>
+                <td th:text="*{companyMail}"></td>
             </tr>
         </table>
     </div>

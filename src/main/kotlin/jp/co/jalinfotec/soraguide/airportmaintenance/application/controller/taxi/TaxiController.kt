@@ -6,6 +6,7 @@ import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TaxiI
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.TaxiCompanyRepository
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
@@ -23,7 +24,7 @@ class TaxiController(
     @GetMapping("/list")
     fun getTaxiList(
             @AuthenticationPrincipal user: User,
-            mav: ModelAndView
+            model: Model
     ): String {
         //ユーザーの空港会社
         var airportCompanyId = user.getCompanyId()
@@ -42,10 +43,24 @@ class TaxiController(
                    taxiCompanyList.add(company.get())
                }
             }
+        } else {
+            model.addAttribute("errorMessage","タクシー情報がありません")
         }
-        mav.addObject("taxiList",taxiCompanyList)
+        model.addAttribute("taxiCompanyList",taxiCompanyList)
 
         //画面を表示
         return "taxi/taxi-list"
     }
+
+    @GetMapping("/add")
+    fun getTaxiAdd (
+            @AuthenticationPrincipal user: User,
+            model: Model
+    ) : String {
+
+        return "taxi/taxi-add"
+    }
+
+
+
 }
