@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
 
@@ -61,6 +62,14 @@ class TaxiController(
         return "taxi/taxi-add"
     }
 
+
+    @PostMapping("/add")
+    fun postTaxiAdd(
+
+    ) : String {
+
+        return "taxi/taxi-add"
+    }
 
 
 }

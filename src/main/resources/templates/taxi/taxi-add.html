@@ -14,6 +14,11 @@
         <h1>タクシー会社追加</h1>
         <hr noshade/>
         <p th:text="${errorMessage}"></p>
+        <form th:action="@{./add}" method="post" th:object="${reservationForm}">
+
+
+
+        </form>
     </div>
 </section>
 </body>
