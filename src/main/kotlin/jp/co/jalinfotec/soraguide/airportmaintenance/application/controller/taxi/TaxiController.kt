@@ -1,5 +1,6 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.application.controller.taxi
 
+import jp.co.jalinfotec.soraguide.airportmaintenance.application.form.TaxiCompanyForm
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.`object`.User
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.AirportCompanyService
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TaxiInformationEntity
@@ -59,15 +60,17 @@ class TaxiController(
             model: Model
     ) : String {
 
+        model.addAttribute("taxiCompanyForm",TaxiCompanyForm())
         return "taxi/taxi-add"
     }
 
 
     @PostMapping("/add")
     fun postTaxiAdd(
-
+            @AuthenticationPrincipal user: User,
+            model: Model
     ) : String {
-
+        model.addAttribute("errorMessage","タクシー会社を作成しました。")
         return "taxi/taxi-add"
     }
 
