@@ -13,8 +13,11 @@
     <div class="content">
         <h1>タクシー会社追加</h1>
         <hr noshade/>
-        <p th:text="${errorMessage}"></p>
-        <form th:action="@{/add}" method="post" th:object="${taxiCompanyForm}">
+        <li th:each="error : ${#fields.detailedErrors()}">
+            <span th:text="${error.message}">Error message</span>
+        </li>
+        <p th:text="${message}"></p>
+        <form th:action="@{/taxi/add}" method="post" th:object="${taxiCompanyForm}">
             <label>会社名</label>
             <input type="text" th:field="*{companyName}" placeholder="サンプルタクシー" required/>
             <br/>
@@ -23,7 +26,7 @@
             <br/>
             <label>メールアドレス</label>
             <input type="email" th:field="*{companyMail}" placeholder="aaa@sample.co.jp" required/>
-
+            <br/>
             <button type="submit">追加</button>
         </form>
     </div>

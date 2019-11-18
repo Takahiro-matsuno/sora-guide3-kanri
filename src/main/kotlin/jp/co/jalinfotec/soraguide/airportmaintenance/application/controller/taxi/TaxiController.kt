@@ -1,14 +1,19 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.application.controller.taxi
 
+import jp.co.jalinfotec.soraguide.airportmaintenance.application.form.SignUpForm
 import jp.co.jalinfotec.soraguide.airportmaintenance.application.form.TaxiCompanyForm
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.`object`.User
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.AirportCompanyService
+import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.TaxiService
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TaxiInformationEntity
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.TaxiCompanyRepository
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.validation.BindingResult
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
@@ -17,7 +22,8 @@ import org.springframework.web.servlet.ModelAndView
 @RequestMapping("/taxi")
 class TaxiController(
         private val airportCompanyService: AirportCompanyService,
-        private val taxiCompanyRepository: TaxiCompanyRepository
+        private val taxiCompanyRepository: TaxiCompanyRepository,
+        private val taxiService: TaxiService
 ) {
 
     /**
@@ -36,31 +42,31 @@ class TaxiController(
         var taxiCompanyList = ArrayList<TaxiInformationEntity>()
 
         //タクシー会社IDのリストからタクシー会社の情報を取得
-        if(companyIdList.any()) {
+        if (companyIdList.any()) {
             //タクシー会社IDのリストが取得できた場合のみ
-            for(companyId in companyIdList) {
+            for (companyId in companyIdList) {
                 val company = taxiCompanyRepository.findById(companyId.taxiId)
 
-                if(company.isPresent) {
-                   taxiCompanyList.add(company.get())
-               }
+                if (company.isPresent) {
+                    taxiCompanyList.add(company.get())
+                }
             }
         } else {
-            model.addAttribute("errorMessage","タクシー情報がありません")
+            model.addAttribute("errorMessage", "タクシー情報がありません")
         }
-        model.addAttribute("taxiCompanyList",taxiCompanyList)
+        model.addAttribute("taxiCompanyList", taxiCompanyList)
 
         //画面を表示
         return "taxi/taxi-list"
     }
 
     @GetMapping("/add")
-    fun getTaxiAdd (
-            @AuthenticationPrincipal user: User,
+    fun getTaxiAdd(
+            @ModelAttribute taxiCompanyForm: TaxiCompanyForm,
             model: Model
-    ) : String {
+    ): String {
 
-        model.addAttribute("taxiCompanyForm",TaxiCompanyForm())
+        //model.addAttribute("taxiCompanyForm",TaxiCompanyForm())
         return "taxi/taxi-add"
     }
 
@@ -68,9 +74,24 @@ class TaxiController(
     @PostMapping("/add")
     fun postTaxiAdd(
             @AuthenticationPrincipal user: User,
+            @ModelAttribute @Validated taxiCompanyForm: TaxiCompanyForm,
+            bindingResult: BindingResult,
             model: Model
-    ) : String {
-        model.addAttribute("errorMessage","タクシー会社を作成しました。")
+    ): String {
+
+        if (bindingResult.hasErrors()) {
+            //TODO バインドでエラーのとき、エラーメッセージを表示させる
+            return getTaxiAdd(taxiCompanyForm, model)
+
+        } else {
+            //タクシー会社登録処理(taxi_infoに追加する処理)
+            val success = taxiService.registerTaxi(taxiCompanyForm,user.getCompanyId())
+
+            if (success) {
+                //TODO テキストボックスをクリアしておきたい
+                model.addAttribute("message", "タクシー会社を追加しました。")
+            }
+        }
         return "taxi/taxi-add"
     }
 

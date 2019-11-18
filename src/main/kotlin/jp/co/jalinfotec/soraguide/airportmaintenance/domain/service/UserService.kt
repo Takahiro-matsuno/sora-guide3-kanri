@@ -58,7 +58,7 @@ class UserService(
     @Retryable(value = [Exception::class], maxAttempts = 3, backoff = Backoff(delay = 1000))
     fun findByCompanyIdAndUsername(companyId: String, username: String): Boolean {
         if (!airportCompanyRepository.findById(companyId).isPresent) {
-            // タクシー会社が見つからない場合は処理終了
+            // 空港会社が見つからない場合は処理終了
             return false
         }
         return true
