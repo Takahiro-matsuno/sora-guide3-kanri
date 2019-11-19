@@ -7,7 +7,12 @@
             <ul>
                 <form name="list" role="form" th:action="@{/taxi/list}" method="get">
                     <li>
-                        <a href="javascript:document.list.submit()">タクシー会社一覧</a>
+                        <a href="javascript:document.list.submit()">タクシー会社管理</a>
+                    </li>
+                </form>
+                <form name="topics" role="form" th:action="@{/topics/list}" method="get">
+                    <li>
+                        <a href="javascript:document.topics.submit()">トピック管理</a>
                     </li>
                 </form>
                 <form name="companySetting" role="form" th:action="@{/company/setting}" method="get">

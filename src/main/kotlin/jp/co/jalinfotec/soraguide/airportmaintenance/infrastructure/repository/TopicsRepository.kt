@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TopicsRepository: JpaRepository<TopicsEntity, Long> {
-
-    fun findByTopicsName(topicsName: String): List<TopicsEntity>
+interface TopicsRepository: JpaRepository<TopicsEntity, String> {
+    fun findByCompanyId(companyId: String): ArrayList<TopicsEntity>
 }

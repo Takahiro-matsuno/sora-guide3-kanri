@@ -17,19 +17,23 @@
         <p th:text="${errorMessage}"></p>
         <button type="button" onclick="location.href='/taxi/add'">追加</button>
         <br/>
-        <button type="button">削除</button>
+        <br/>
         <table rules="rows">
             <tr>
+                <th></th>
                 <th>会社名</th>
                 <th>電話番号</th>
                 <th>メールアドレス</th>
             </tr>
             <tr th:each="taxi : ${taxiCompanyList}" th:object="${taxi}">
+                <td><input type="checkbox"></td>
                 <td th:text="*{companyName}"></td>
                 <td th:text="*{contact}"></td>
                 <td th:text="*{companyMail}"></td>
             </tr>
         </table>
+        <br>
+        <button type="button">削除</button>
     </div>
 </section>
 </body>

@@ -9,7 +9,7 @@ class TopicsService(
         private val topicsRepository: TopicsRepository
 ) {
 
-    fun getTopicsList(): List<TopicsEntity> {
-        return topicsRepository.findByTopicsName("")
+    fun getTopicsList(companyId: String): ArrayList<TopicsEntity> {
+        return topicsRepository.findByCompanyId(companyId)
     }
 }

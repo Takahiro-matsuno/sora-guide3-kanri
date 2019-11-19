@@ -27,7 +27,7 @@ class TaxiController(
 ) {
 
     /**
-     * タクシー管理画面
+     * タクシー会社一覧画面
      */
     @GetMapping("/list")
     fun getTaxiList(
@@ -60,6 +60,9 @@ class TaxiController(
         return "taxi/taxi-list"
     }
 
+    /**
+     * タクシー会社追加画面
+     */
     @GetMapping("/add")
     fun getTaxiAdd(
             @ModelAttribute taxiCompanyForm: TaxiCompanyForm,
@@ -71,6 +74,9 @@ class TaxiController(
     }
 
 
+    /**
+     * タクシー会社追加処理
+     */
     @PostMapping("/add")
     fun postTaxiAdd(
             @AuthenticationPrincipal user: User,
@@ -95,5 +101,8 @@ class TaxiController(
         return "taxi/taxi-add"
     }
 
+    /**
+     * タクシー会社削除画面
+     */
 
 }
