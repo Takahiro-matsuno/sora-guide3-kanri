@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ja"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>そらガイド 空港管理-会社情報設定</title>
+</head>
+<body>
+<section layout:fragment="content" th:object="${airportInfo}">
+    <div class="content">
+        <h1>会社情報設定</h1>
+        <hr noshade/>
+        <div class="center">
+            <p id="message" th:text="${message}"></p>
+            <th:block th:text="'会社名：' + *{companyName}"/>
+            <br>
+            <th:block th:text="'電話番号：' + *{contact}"/>
+
+            <form th:action="@{/company/setting}" method="post">
+                <input type="text" th:field="*{companyName}" placeholder="新しい会社名" required/>
+                <br/>
+                <input type="text" th:field="*{contact}" placeholder="新しい電話番号" required/>
+                <br/>
+                <input type="submit" value="更新する"/>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
