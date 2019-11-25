@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>そらガイド 空港管理-タクシー会社削除</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="content">
+        <h1>タクシー会社削除</h1>
+        <hr noshade/>
+
+        <p th:text="${errorMessage}"></p>
+        <br/>
+        <p th:text="${message}"></p>
+        <div>
+            <form th:action="@{/taxi/delete}" method="post" th:object="${taxiInfo}">
+                <table rules="rows">
+                    <tr>
+                        <th>会社名</th>
+                        <td th:text="*{companyName}"></td>
+                    </tr>
+                    <tr>
+                        <th>電話番号</th>
+                        <td th:text="*{contact}"></td>
+                    </tr>
+                    <tr>
+                        <th>メールアドレス</th>
+                        <td th:text="*{companyMail}"></td>
+                    </tr>
+                </table>
+                <input type="submit" value="削除"/>
+                <input type="hidden" th:field="*{companyId}"/>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

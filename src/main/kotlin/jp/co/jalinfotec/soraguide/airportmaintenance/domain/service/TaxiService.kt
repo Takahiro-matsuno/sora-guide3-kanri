@@ -93,5 +93,23 @@ class TaxiService(
         return result.toBigInteger()
     }
 
+    /**
+     * タクシー会社を削除する
+     */
+    fun deleteTaxi(companyId: String) {
+        //タクシー会社テーブルから削除
+        //taxiCompanyRepository.deleteById(companyId)
+
+        //airport_taxiテーブルから削除対象のairport_taxi_idを取得する
+        val airportTaxiList = airportTaxiRepository.findByTaxiId(companyId)
+
+        //airport_taxiテーブルから削除
+        airportTaxiList.forEach(){
+            airportTaxiRepository.delete(it)
+        }
+
+    }
+
+
 
 }

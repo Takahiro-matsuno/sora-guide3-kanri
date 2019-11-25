@@ -20,21 +20,19 @@
         <br/>
         <table rules="rows">
             <tr>
-                <th></th>
                 <th>会社名</th>
                 <th>電話番号</th>
                 <th>メールアドレス</th>
             </tr>
-            <tr th:each="taxi : ${taxiCompanyList}" th:object="${taxi}">
-                <td><input type="checkbox"></td>
+            <tr th:each="taxi : ${taxiCompanyList}" th:object="${taxi}" th:attr="onclick='listClicked(\'' + ${taxi.companyId} +'\');'">
                 <td th:text="*{companyName}"></td>
                 <td th:text="*{contact}"></td>
                 <td th:text="*{companyMail}"></td>
             </tr>
         </table>
         <br>
-        <button type="button">削除</button>
     </div>
+    <script type="text/javascript" th:src="@{/js/list.js}"></script>
 </section>
 </body>
 </html>

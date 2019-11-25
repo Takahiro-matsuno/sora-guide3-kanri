@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 interface AirportTaxiRepository: JpaRepository<AirPortTaxiEntity,String> {
 
     fun findByAirportId(airport_id: String) : MutableList<AirPortTaxiEntity>
+    fun findByTaxiId(taxi_id: String) :  MutableList<AirPortTaxiEntity>
 }

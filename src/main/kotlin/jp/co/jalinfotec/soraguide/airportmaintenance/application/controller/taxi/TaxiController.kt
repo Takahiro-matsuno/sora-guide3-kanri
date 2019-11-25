@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
 
 @Controller
@@ -104,5 +101,34 @@ class TaxiController(
     /**
      * タクシー会社削除画面
      */
+    @GetMapping("/delete")
+    fun getTaxiDelete(
+        @RequestParam("id") id: String,
+        model: Model
+    ): String {
+
+        var taxiCompany = taxiCompanyRepository.findById(id)
+
+        var taxiInfo = taxiCompany.get()
+
+        model.addAttribute("taxiInfo",taxiInfo)
+
+        return "/taxi/taxi-delete"
+    }
+
+    /**
+     * タクシー会社削除処理
+     */
+    @PostMapping("/delete")
+    fun postTaxiDelete(
+            @AuthenticationPrincipal user: User,
+            //delList:削除対象の会社IDのリスト
+            taxiInfo: TaxiInformationEntity,
+            model: Model
+    ): String {
+
+        taxiService.deleteTaxi(taxiInfo.companyId)
+        return "redirect:/taxi/list"
+    }
 
 }
