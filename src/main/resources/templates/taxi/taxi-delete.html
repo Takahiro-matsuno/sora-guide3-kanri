@@ -19,7 +19,7 @@
         <p th:text="${message}"></p>
         <div>
             <form th:action="@{/taxi/delete}" method="post" th:object="${taxiInfo}">
-                <table rules="rows">
+                <table class="table" rules="rows">
                     <tr>
                         <th>会社名</th>
                         <td th:text="*{companyName}"></td>
