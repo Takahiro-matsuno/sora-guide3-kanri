@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>そらガイド 空港管理-会社情報設定</title>
+    <link th:href="@{/css/changePassword.css}" rel="stylesheet"/>
 </head>
 <body>
 <section layout:fragment="content" th:object="${airportInfo}">
@@ -25,7 +26,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" th:field="*{contact}" placeholder="新しい電話番号" required/>
                 </div>
-                    <input type="submit" class="btn btn-primary" value="更新する"/>
+                    <input type="submit" value="更新する"/>
             </form>
         </div>
     </div>

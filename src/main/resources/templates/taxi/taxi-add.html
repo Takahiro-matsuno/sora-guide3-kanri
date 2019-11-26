@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>そらガイド 空港管理-タクシー会社追加</title>
+    <link th:href="@{/css/changePassword.css}" rel="stylesheet"/>
 </head>
 <body>
 <section layout:fragment="content">
@@ -19,15 +20,19 @@
         <p th:text="${message}"></p>
         <form th:action="@{/taxi/add}" method="post" th:object="${taxiCompanyForm}">
             <label>会社名</label>
-            <input type="text" th:field="*{companyName}" placeholder="サンプルタクシー" required/>
-            <br/>
+            <div class="form-group">
+                <input type="text" th:field="*{companyName}" class="form-control" placeholder="サンプルタクシー" required/>
+            </div>
             <label>電話番号</label>
-            <input type="tel" th:field="*{companyContact}" placeholder="08012345678" required/>
-            <br/>
+            <div class="form-group">
+                <input type="tel" th:field="*{companyContact}" class="form-control" placeholder="08012345678" required/>
+            </div>
             <label>メールアドレス</label>
-            <input type="email" th:field="*{companyMail}" placeholder="aaa@sample.co.jp" required/>
-            <br/>
-            <button type="submit">追加</button>
+            <div class="form-group">
+                <input type="email" th:field="*{companyMail}" class="form-control" placeholder="aaa@sample.co.jp"
+                       required/>
+            </div>
+            <input type="submit" value="追加する"/>
         </form>
     </div>
 </section>
