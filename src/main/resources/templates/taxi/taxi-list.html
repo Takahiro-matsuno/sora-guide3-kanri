@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>そらガイド 空港管理-タクシー会社一覧</title>
+    <link th:href="@{/css/changePassword.css}" rel="stylesheet"/>
 </head>
 <body>
 <section layout:fragment="content">
@@ -15,7 +16,7 @@
         <hr noshade/>
 
         <p th:text="${errorMessage}"></p>
-        <button type="button" onclick="location.href='/taxi/add'">追加</button>
+        <input type="submit" onclick="location.href='/taxi/add'" value="追加"/>
         <br/>
         <br/>
         <table class="table" rules="rows">
