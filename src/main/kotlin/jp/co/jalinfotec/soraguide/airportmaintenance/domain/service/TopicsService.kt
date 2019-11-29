@@ -41,4 +41,13 @@ class TopicsService(
 
         return topicList
     }
+
+    /**
+     * topic内容を取得する
+     */
+    fun getTopic(topicId: Long): TopicEntity {
+        return topicRepository.findById(topicId).get()
+    }
+
+
 }

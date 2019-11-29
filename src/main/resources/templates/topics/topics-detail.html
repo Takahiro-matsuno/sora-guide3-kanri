@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout">
 <head>
     <meta charset="UTF-8">
-    <title>topics-detail</title>
+    <title>そらガイド 空港管理-トピック詳細</title>
 </head>
 <body>
-
+<section layout:fragment="content">
+    <div class="content">
+        <table class="table" rules="rows" th:object="${topic}">
+            <tr>
+                <th>トピックID</th>
+                <td th:text="*{topicId}"></td>
+            </tr>
+            <tr>
+                <th>トピック名</th>
+                <td th:text="*{topicName}"></td>
+            </tr>
+            <tr>
+                <th>画像</th>
+                <td th:text="*{topicImage}"></td>
+            </tr>
+            <tr>
+                <th>URL</th>
+                <td th:text="*{topicUrl}"></td>
+            </tr>
+            <tr>
+                <th>表示フラグ</th>
+                <td th:text="*{display}"></td>
+            </tr>
+        </table>
+    </div>
+</section>
 </body>
 </html>

@@ -17,13 +17,16 @@
             <tr>
                 <th>トピックID</th>
                 <th>トピック名</th>
+                <th>表示フラグ</th>
             </tr>
-            <tr th:each="topics : ${topicsList}" th:object="${topics}">
-                <td th:text="*{topicsId}"></td>
-                <td th:text="*{topicsName}"></td>
+            <tr th:each="topic : ${topicList}" th:object="${topic}" th:attr="onclick='listClicked(\'' + ${topic.topicId} +'\');'">
+                <td th:text="*{topicId}"></td>
+                <td th:text="*{topicName}"></td>
+                <td th:text="*{display}"></td>
             </tr>
         </table>
     </div>
+    <script type="text/javascript" th:src="@{/js/topicList.js}"></script>
 </section>
 </body>
 </html>
