@@ -2,7 +2,6 @@ package jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity
 
 import javax.persistence.*
 
-
 @Entity
 @Table(name = "topic")
 data class TopicEntity(

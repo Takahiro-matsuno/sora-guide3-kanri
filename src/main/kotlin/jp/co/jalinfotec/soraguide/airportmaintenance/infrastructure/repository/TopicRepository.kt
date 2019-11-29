@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TopicRepository: JpaRepository<TopicEntity, String> {
-    fun findByCompanyId(companyId: String): ArrayList<TopicEntity>
-}
+interface TopicRepository: JpaRepository<TopicEntity, Long>

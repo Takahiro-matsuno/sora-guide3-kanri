@@ -24,13 +24,13 @@ class TopicsController(
             ): String {
         //ユーザーの空港IDに紐付くトピック情報を取得し、一覧表示する
         //ユーザーの空港ID
-        var companyId = user.getCompanyId()
+        val companyId = user.getCompanyId()
 
         //空港に紐付くtopic_idの一覧を取得する
-
-
+        val topicIdList = topicsService.getTopicIdList(companyId)
 
         //取得したtopic_idからtopic内容を取得する
+        val topicList = topicsService.getTopicList(topicIdList)
 
 
 
