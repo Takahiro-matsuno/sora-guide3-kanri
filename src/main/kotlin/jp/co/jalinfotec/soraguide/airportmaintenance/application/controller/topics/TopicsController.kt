@@ -32,7 +32,7 @@ class TopicsController(
         //取得したtopic_idからtopic内容を取得する
         val topicList = topicsService.getTopicList(topicIdList)
 
-
+        model.addAttribute("topicList",topicList)
 
 
         return "topics/topics-list"
