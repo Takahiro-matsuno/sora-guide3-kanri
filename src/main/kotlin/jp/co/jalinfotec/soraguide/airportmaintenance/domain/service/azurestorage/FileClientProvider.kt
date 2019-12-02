@@ -2,11 +2,11 @@ package jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.azurestorag
 
 import com.microsoft.azure.storage.CloudStorageAccount
 import com.microsoft.azure.storage.file.CloudFileClient
+import jp.co.jalinfotec.soraguide.airportmaintenance.util.Environment
 import java.io.IOException
 import java.net.URISyntaxException
 import java.security.InvalidKeyException
 import java.util.*
-
 
 /**
  * Manages the storage file client
@@ -38,7 +38,7 @@ internal object FileClientProvider {// Retrieve the connection string
             }
             val storageAccount: CloudStorageAccount
             storageAccount = try {
-                CloudStorageAccount.parse(prop.getProperty("StorageConnectionString"))
+                CloudStorageAccount.parse(Environment.AZURE_STORAGE_KEY)
             } catch (e: IllegalArgumentException) {
                 println("\nConnection string specifies an invalid URI.")
                 println("Please confirm the connection string is in the Azure connection string format.")

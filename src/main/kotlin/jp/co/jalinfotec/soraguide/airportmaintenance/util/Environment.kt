@@ -5,4 +5,5 @@ package jp.co.jalinfotec.soraguide.airportmaintenance.util
  */
 object Environment {
     val FROM_ADDRESS = System.getenv("FROM_ADDRESS")
+    val AZURE_STORAGE_KEY = System.getenv("AZURE_STORAGE_KEY")
 }

@@ -1,17 +1,22 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.application.controller.topics
 
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.`object`.User
-import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.TopicsService
+import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics.TopicsDbService
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.azurestorage.FileBasics
+import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics.TopicsFileService
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.multipart.MultipartFile
+import java.lang.Exception
 
 @Controller
 class TopicsController(
-        private val topicsService: TopicsService
+        private val topicsService: TopicsDbService,
+        private val topicsFileService: TopicsFileService
 ) {
 
 
@@ -60,4 +65,24 @@ class TopicsController(
         return "topics/topics-detail"
     }
 
+    /**
+     *
+     */
+    @GetMapping("/upload")
+    fun getUpload(model: Model): String {
+        return "topics/topics-upload"
+    }
+    @PostMapping("/upload")
+    fun postUpload(
+            @RequestParam("imageFile", required = true) imageFile: MultipartFile,
+            @RequestParam("topicUrl", required = true) topicUrl: String,
+            model: Model
+    ): String {
+        return try {
+            topicsFileService.uploadTopicsFile(imageFile, topicUrl)
+            "topics/topics-upload"
+        } catch (ex: Exception) {
+            "error"
+        }
+    }
 }

@@ -1,14 +1,12 @@
-package jp.co.jalinfotec.soraguide.airportmaintenance.domain.service
+package jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics
 
-import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.AirportTopicEntity
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TopicEntity
-import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.AirportTaxiRepository
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.AirportTopicRepository
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.TopicRepository
 import org.springframework.stereotype.Service
 
 @Service
-class TopicsService(
+class TopicsDbService(
         private val topicRepository: TopicRepository,
         private val airportTopicRepository: AirportTopicRepository
 ) {
@@ -48,6 +46,4 @@ class TopicsService(
     fun getTopic(topicId: Long): TopicEntity {
         return topicRepository.findById(topicId).get()
     }
-
-
 }
