@@ -6,6 +6,7 @@ import com.sendgrid.*
 import com.sendgrid.helpers.mail.Mail
 import com.sendgrid.helpers.mail.objects.Content
 import com.sendgrid.helpers.mail.objects.Email
+import jp.co.jalinfotec.soraguide.airportmaintenance.util.Environment
 import org.springframework.retry.annotation.Backoff
 import org.springframework.retry.annotation.Retryable
 import org.springframework.stereotype.Service
@@ -68,7 +69,7 @@ class SendMailService(
         }
 
         // 送信メール設定
-        val from = Email(Constant.FROM_ADDRESS)
+        val from = Email(Environment.FROM_ADDRESS)
         //TODO 開発用誤送信防止のため、アドレス固定
         println("本来送信するメールアドレス：$mailAddress")
         val to = Email("hideto.s.kojima@jalinfotec.co.jp"/*mailAddress*/)
