@@ -2,6 +2,7 @@ package jp.co.jalinfotec.soraguide.airportmaintenance.application.controller.top
 
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.`object`.User
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.TopicsService
+import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.azurestorage.FileBasics
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -52,6 +53,9 @@ class TopicsController(
 
         val topic = topicsService.getTopic(id.toLong())
         model.addAttribute("topic",topic)
+
+        val basicSamples: FileBasics = FileBasics()
+        basicSamples.runSamples()
 
         return "topics/topics-detail"
     }

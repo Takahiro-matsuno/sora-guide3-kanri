@@ -64,6 +64,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java
 	implementation("com.sendgrid:sendgrid-java:4.4.1")
 
+	/**
+	 * Azure Storage
+	 */
+	implementation("com.microsoft.azure:azure-storage:4.2.0")
 
 }
 
