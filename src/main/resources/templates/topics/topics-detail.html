@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>そらガイド 空港管理-トピック詳細</title>
+    <link th:href="@{/css/topics-detail.css}" rel="stylesheet"/>
 </head>
 <body>
 <section layout:fragment="content">
@@ -22,11 +23,13 @@
             </tr>
             <tr>
                 <th>画像</th>
-                <td th:text="*{topicImage}"></td>
+                <td><img th:src="*{topicImage}"></td>
             </tr>
             <tr>
                 <th>URL</th>
-                <td th:text="*{topicUrl}"></td>
+                <td>
+                    <a th:text="*{topicUrl}" th:href="*{topicUrl}"></a>
+                </td>
             </tr>
             <tr>
                 <th>表示フラグ</th>
