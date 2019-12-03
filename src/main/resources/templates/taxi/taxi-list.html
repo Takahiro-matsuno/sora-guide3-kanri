@@ -19,12 +19,14 @@
         <input type="submit" onclick="location.href='/taxi/add'" value="追加"/>
         <br/>
         <br/>
-        <table class="table" rules="rows">
-            <tr>
-                <th>会社名</th>
-                <th>電話番号</th>
-                <th>メールアドレス</th>
-            </tr>
+        <table class="table table-hover" rules="rows">
+            <thead class="thead-dark">
+                <tr>
+                    <th>会社名</th>
+                    <th>電話番号</th>
+                    <th>メールアドレス</th>
+                </tr>
+            </thead>
             <tr th:each="taxi : ${taxiCompanyList}" th:object="${taxi}" th:attr="onclick='listClicked(\'' + ${taxi.companyId} +'\');'">
                 <td th:text="*{companyName}"></td>
                 <td th:text="*{contact}"></td>
