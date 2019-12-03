@@ -1,18 +1,43 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Topics Upload</title>
+    <title>そらガイド 空港管理-トピック追加</title>
 </head>
 <body>
-<h1>アップロード</h1>
-<form th:action="@{/topics/reg}" enctype="multipart/form-data" method="post">
-    <p><label>ファイル:</label><input type="file" th:name="imageFile" accept="image/*" required /></p>
-    <p><label>URL:</label><input type="text" th:name="topicUrl" required /></p>
-    <input type="submit" value="submit"/>
-</form>
+<section layout:fragment="content">
+    <h1>トピック追加</h1>
+    <hr noshade/>
+    <li th:each="error : ${#fields.detailedErrors()}">
+        <span th:text="${error.message}">Error message</span>
+    </li>
+    <p th:text="${message}"></p>
+    <form th:action="@{/topics/reg}" enctype="multipart/form-data" method="post" th:object="${topicsForm}">
+        <label>トピック名</label>
+        <div class="form-group">
+            <input type="text" th:field="*{name}" class="form-control" placeholder="広告1" required/>
+        </div>
+        <label>画像ファイル</label>
+        <div class="form-group">
+            <input type="file" th:name="imageFile" accept="image/*" th:field="*{imageFile}" class="form-control" required/>
+        </div>
+        <label>URL</label><label>URL</label>
+        <div class="form-group">
+            <input type="text" th:field="*{url}" class="form-control" required/>
+        </div>
+        <label>表示設定</label>
+        <div class="form-group">
+            <input type="text" th:field="*{display}" class="form-control" required checked/>
+        </div>
+        <input type="submit" value="submit"/>
+    </form>
+</section>
 </body>
 </html>

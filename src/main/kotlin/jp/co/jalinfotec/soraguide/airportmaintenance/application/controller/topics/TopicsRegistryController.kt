@@ -19,7 +19,11 @@ class TopicsRegistryController(
      * トピックス登録
      */
     @GetMapping("/reg")
-    fun getUpload(model: Model): String {
+    fun getUpload(
+            @ModelAttribute topicsForm:TopicsForm,
+            model: Model
+    ): String {
+
         return "topics/topics-reg"
     }
 
