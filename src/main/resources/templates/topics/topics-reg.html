@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>アップロード</h1>
-<form th:action="@{/upload}" enctype="multipart/form-data" method="post">
+<form th:action="@{/topics/reg}" enctype="multipart/form-data" method="post">
     <p><label>ファイル:</label><input type="file" th:name="imageFile" accept="image/*" required /></p>
     <p><label>URL:</label><input type="text" th:name="topicUrl" required /></p>
     <input type="submit" value="submit"/>
