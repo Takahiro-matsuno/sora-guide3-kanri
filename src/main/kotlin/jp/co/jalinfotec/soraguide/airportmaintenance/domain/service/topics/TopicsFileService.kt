@@ -13,12 +13,12 @@ class TopicsFileService(
 ) {
 
     @Throws(Exception::class)
-    fun uploadTopicsFile(imageFile: MultipartFile, url: String) {
+    fun uploadTopicsFile(imageFile: MultipartFile, url: String,companyId: String) {
         // AZ Storage Client作成
         val storageAccount = CloudStorageAccount.parse(Environment.AZURE_STORAGE_KEY)
         val blobClient = storageAccount.createCloudBlobClient()
-        // TODO アカウントによってコンテナを切り替えるようにする
-        val container = blobClient.getContainerReference("takamatsu")
+        //空港IDごとに別コンテナに格納する
+        val container = blobClient.getContainerReference(companyId)
         if (container.createIfNotExists()) {
             throw Exception("Container Not Found:${container.name}")
         }

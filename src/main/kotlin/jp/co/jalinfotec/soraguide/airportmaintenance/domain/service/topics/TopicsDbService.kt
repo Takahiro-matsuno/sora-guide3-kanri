@@ -1,9 +1,14 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics
 
+import jp.co.jalinfotec.soraguide.airportmaintenance.application.form.TopicsForm
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TopicEntity
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.AirportTopicRepository
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.TopicRepository
+import org.hibernate.exception.JDBCConnectionException
+import org.springframework.retry.annotation.Backoff
+import org.springframework.retry.annotation.Retryable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class TopicsDbService(
@@ -46,4 +51,31 @@ class TopicsDbService(
     fun getTopic(topicId: Long): TopicEntity {
         return topicRepository.findById(topicId).get()
     }
+
+    /**
+     * topicを登録する
+     */
+    @Transactional
+    @Retryable(value = [JDBCConnectionException::class], maxAttempts = 3, backoff = Backoff(delay = 1000))
+    fun registerTopic(topicsForm: TopicsForm,imageUrl: String) {
+
+        val topicEntity = TopicEntity(
+                topicName = topicsForm.name,
+                topicImage = imageUrl,
+                topicUrl = topicsForm.url,
+                display = topicsForm.display
+        )
+        topicRepository.save(topicEntity)
+
+    }
+
+    /**
+     * 空港に紐付くtopicIdを登録する
+     */
+    @Transactional
+    @Retryable(value = [JDBCConnectionException::class], maxAttempts = 3, backoff = Backoff(delay = 1000))
+    fun registerTopicId(companyId: String,topicId: Long) {
+        
+    }
+
 }
