@@ -7,9 +7,9 @@ import javax.validation.constraints.NotNull
 data class TopicsForm(
 
         @get:NotEmpty
-        val name: String = "",
-        val imageFile: MultipartFile? = null,
+        var name: String = "",
+        var imageFile: MultipartFile? = null,
         @get:NotEmpty
-        val url: String = "",
-        val display: Long = 1
+        var url: String = "",
+        var display: Long = 1
 )

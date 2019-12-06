@@ -36,22 +36,25 @@ class TopicsRegistryController(
     fun postUpload(
             @AuthenticationPrincipal user: User,
             @Validated topicsForm: TopicsForm,
+           // @RequestParam("imageFile", required = true) imageFile: MultipartFile,
             bindingResult: BindingResult,
             model: Model
     ): String {
         return try {
+
+            //topicsForm.imageFile = imageFile
 
             //TODO これでええんか・・・
             if(topicsForm.imageFile == null || bindingResult.hasErrors()) {
                 throw Exception()
             }
 
-            val filename = topicsForm.imageFile.originalFilename
+            val filename = topicsForm.imageFile!!.originalFilename
             val companyId = user.getCompanyId()
             val imageUrl = "https://topmenufiles.blob.core.windows.net/"+companyId+"/"+filename
 
             //画像ファイルをアップロード
-            topicsFileService.uploadTopicsFile(topicsForm.imageFile, topicsForm.url, companyId)
+            topicsFileService.uploadTopicsFile(topicsForm.imageFile!!, topicsForm.url, companyId)
 
             //topicテーブルを更新
             topicsDbService.registerTopic(topicsForm,imageUrl)
