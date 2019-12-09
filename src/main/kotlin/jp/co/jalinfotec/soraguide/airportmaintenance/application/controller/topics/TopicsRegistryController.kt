@@ -42,28 +42,24 @@ class TopicsRegistryController(
     ): String {
         return try {
 
+            println("コントローラー開始")
+
             //topicsForm.imageFile = imageFile
 
             //TODO これでええんか・・・
             if(topicsForm.imageFile == null || bindingResult.hasErrors()) {
                 throw Exception()
             }
-
-            val filename = topicsForm.imageFile!!.originalFilename
-            val companyId = user.getCompanyId()
-            val imageUrl = "https://topmenufiles.blob.core.windows.net/"+companyId+"/"+filename
-
-            //画像ファイルをアップロード
-            topicsFileService.uploadTopicsFile(topicsForm.imageFile!!, topicsForm.url, companyId)
-
-            //topicテーブルを更新
-            topicsDbService.registerTopic(topicsForm,imageUrl)
+            // 画像ファイルをアップロード
+            val imageUrl = topicsFileService.uploadTopicsFile(topicsForm.imageFile!!, user.getCompanyId())
+            // topicテーブルを更新
+            topicsDbService.registerTopic(topicsForm, imageUrl)
 
             //airport_topicテーブルを更新
            // topicsDbService.registerTopicId(companyId,)
-
             "topics/topics-reg"
         } catch (ex: Exception) {
+            ex.printStackTrace()
             "error"
         }
     }
