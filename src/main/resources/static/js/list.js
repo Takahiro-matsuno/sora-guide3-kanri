@@ -1,7 +1,7 @@
 function listClicked(id){
         //フォーム作成
         var form = document.createElement("form");
-        form.setAttribute("action", "/taxi/delete");
+        form.setAttribute("action", "./delete");
         form.setAttribute("method", "get");
         form.style.display = "none";
         document.body.appendChild(form);

@@ -82,5 +82,5 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<War> {
 	enabled = true
-	archiveName = "app.war"
+	archiveName = "AirportMaintenance.war"
 }
