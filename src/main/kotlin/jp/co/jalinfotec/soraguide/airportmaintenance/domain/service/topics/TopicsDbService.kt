@@ -1,6 +1,7 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics
 
 import jp.co.jalinfotec.soraguide.airportmaintenance.application.form.TopicsForm
+import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.AirportTopicEntity
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TopicEntity
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.AirportTopicRepository
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.repository.TopicRepository
@@ -57,7 +58,7 @@ class TopicsDbService(
      */
     @Transactional
     @Retryable(value = [JDBCConnectionException::class], maxAttempts = 3, backoff = Backoff(delay = 1000))
-    fun registerTopic(topicsForm: TopicsForm,imageUrl: String) {
+    fun registerTopic(topicsForm: TopicsForm,imageUrl: String): Long {
 
         val topicEntity = TopicEntity(
                 topicName = topicsForm.name,
@@ -67,6 +68,9 @@ class TopicsDbService(
         )
         topicRepository.save(topicEntity)
 
+
+        var topic = topicRepository.findByTopicImage(topicEntity.topicImage)
+        return topic.topicId
     }
 
     /**
@@ -75,7 +79,12 @@ class TopicsDbService(
     @Transactional
     @Retryable(value = [JDBCConnectionException::class], maxAttempts = 3, backoff = Backoff(delay = 1000))
     fun registerTopicId(companyId: String,topicId: Long) {
-        
+
+        val airportTopicEntity = AirportTopicEntity(
+                airportId = companyId,
+                topicId = topicId
+        )
+        airportTopicRepository.save(airportTopicEntity)
     }
 
 }

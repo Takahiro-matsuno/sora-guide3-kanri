@@ -44,8 +44,6 @@ class TopicsRegistryController(
 
             println("コントローラー開始")
 
-            //topicsForm.imageFile = imageFile
-
             //TODO これでええんか・・・
             if(topicsForm.imageFile == null || bindingResult.hasErrors()) {
                 throw Exception()
@@ -53,10 +51,10 @@ class TopicsRegistryController(
             // 画像ファイルをアップロード
             val imageUrl = topicsFileService.uploadTopicsFile(topicsForm.imageFile!!, user.getCompanyId())
             // topicテーブルを更新
-            topicsDbService.registerTopic(topicsForm, imageUrl)
+            val topicsId = topicsDbService.registerTopic(topicsForm, imageUrl)
 
             //airport_topicテーブルを更新
-           // topicsDbService.registerTopicId(companyId,)
+            topicsDbService.registerTopicId(user.getCompanyId(),topicsId)
             "topics/topics-reg"
         } catch (ex: Exception) {
             ex.printStackTrace()

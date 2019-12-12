@@ -13,7 +13,7 @@ data class TopicEntity(
         @Column(name = "topic_name", nullable = false, unique = false)
         val topicName: String = "",
 
-        @Column(name = "topic_image", nullable = false, unique = false)
+        @Column(name = "topic_image", nullable = false, unique = true)
         val topicImage: String = "",
 
         @Column(name = "topic_url", nullable = false, unique = false)
