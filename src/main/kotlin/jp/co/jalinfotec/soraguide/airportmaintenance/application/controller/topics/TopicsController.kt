@@ -41,20 +41,5 @@ class TopicsController(
         return "topics/topics-list"
     }
 
-    /**
-     * トピック詳細画面
-     */
-    @GetMapping("/topics/detail")
-    fun getTopicDetail(
-            @RequestParam("id") id: String,
-            model: Model
-    ): String {
-
-        val topic = topicsService.getTopic(id.toLong())
-        model.addAttribute("topic",topic)
-        return "topics/topics-detail"
-    }
-
-
 
 }
