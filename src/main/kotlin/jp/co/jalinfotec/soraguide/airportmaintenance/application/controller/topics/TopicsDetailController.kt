@@ -29,17 +29,34 @@ class TopicsDetailController(
 
 
     // 更新
-    @PutMapping("/upd")
-    fun putDetail(model: Model): String {
+    @PostMapping("/upd")
+    fun putDetail(
+            topic: TopicEntity,
+            model: Model
+    ): String {
+
+        //送られてきたEntityで更新を行う
+        //画像は更新不可とする
+        //画像を変えたい場合は、削除→新規で追加してもらう
+
+
+
+
+
+
         return "topics/topics-list"
     }
 
     //　削除
-    @PostMapping("/del")
+    @PostMapping("/delete")
     fun deleteDetail(
             topic: TopicEntity,
             model: Model
     ): String {
+        //airport_topicテーブルから削除
+        //topicテーブルから削除
+        //Azureストレージから対応する画像を削除
+
 
 
 

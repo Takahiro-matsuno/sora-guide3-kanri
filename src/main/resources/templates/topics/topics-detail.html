@@ -13,7 +13,7 @@
 <body>
 <section layout:fragment="content">
     <div class="content">
-        <form th:action="@{/topics/detail/del}" method="post" th:object="${topic}">
+        <form th:action="@{/topics/detail/delete}" method="post" th:object="${topic}">
             <table class="table" rules="rows">
                 <tr>
                     <th>トピックID</th>
@@ -38,6 +38,7 @@
                     <td th:text="*{display}"></td>
                 </tr>
             </table>
+            <input type="submit" th:formaction="@{/topics/detail/upd}" value="更新"/>
             <input type="submit" value="削除"/>
         </form>
     </div>
