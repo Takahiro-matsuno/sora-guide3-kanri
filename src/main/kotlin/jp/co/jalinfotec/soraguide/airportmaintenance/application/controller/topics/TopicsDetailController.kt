@@ -1,6 +1,7 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.application.controller.topics
 
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics.TopicsDbService
+import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TopicEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -34,8 +35,14 @@ class TopicsDetailController(
     }
 
     //　削除
-    @DeleteMapping("/del")
-    fun deleteDetail(model: Model): String {
+    @PostMapping("/del")
+    fun deleteDetail(
+            topic: TopicEntity,
+            model: Model
+    ): String {
+
+
+
         return "topics/topics-list"
     }
 }

@@ -7,35 +7,39 @@
 <head>
     <meta charset="UTF-8">
     <title>そらガイド 空港管理-トピック詳細</title>
+    <link th:href="@{/css/changePassword.css}" rel="stylesheet"/>
     <link th:href="@{/css/topics-detail.css}" rel="stylesheet"/>
 </head>
 <body>
 <section layout:fragment="content">
     <div class="content">
-        <table class="table" rules="rows" th:object="${topic}">
-            <tr>
-                <th>トピックID</th>
-                <td th:text="*{topicId}"></td>
-            </tr>
-            <tr>
-                <th>トピック名</th>
-                <td th:text="*{topicName}"></td>
-            </tr>
-            <tr>
-                <th>画像</th>
-                <td><img th:src="*{topicImage}"></td>
-            </tr>
-            <tr>
-                <th>URL</th>
-                <td>
-                    <a th:text="*{topicUrl}" th:href="*{topicUrl}"></a>
-                </td>
-            </tr>
-            <tr>
-                <th>表示フラグ</th>
-                <td th:text="*{display}"></td>
-            </tr>
-        </table>
+        <form th:action="@{/topics/detail/del}" method="post" th:object="${topic}">
+            <table class="table" rules="rows">
+                <tr>
+                    <th>トピックID</th>
+                    <td th:text="*{topicId}"></td>
+                </tr>
+                <tr>
+                    <th>トピック名</th>
+                    <td th:text="*{topicName}"></td>
+                </tr>
+                <tr>
+                    <th>画像</th>
+                    <td><img th:src="*{topicImage}"></td>
+                </tr>
+                <tr>
+                    <th>URL</th>
+                    <td>
+                        <a th:text="*{topicUrl}" th:href="*{topicUrl}"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>表示フラグ</th>
+                    <td th:text="*{display}"></td>
+                </tr>
+            </table>
+            <input type="submit" value="削除"/>
+        </form>
     </div>
 </section>
 </body>
