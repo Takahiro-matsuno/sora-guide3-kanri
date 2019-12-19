@@ -18,6 +18,7 @@
                 <tr>
                     <th>トピックID</th>
                     <td th:text="*{topicId}"></td>
+                    <input type="hidden" th:field="*{topicId}"/>
                 </tr>
                 <tr>
                     <th>トピック名</th>
@@ -26,6 +27,7 @@
                 <tr>
                     <th>画像</th>
                     <td><img th:src="*{topicImage}"></td>
+                    <input type="hidden" th:field="*{topicImage}"/>
                 </tr>
                 <tr>
                     <th>URL</th>

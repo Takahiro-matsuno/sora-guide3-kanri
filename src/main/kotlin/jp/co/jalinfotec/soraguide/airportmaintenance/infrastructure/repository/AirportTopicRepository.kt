@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository
 interface AirportTopicRepository: JpaRepository<AirportTopicEntity,String> {
 
     fun findByAirportId(airport_id: String) : ArrayList<AirportTopicEntity>
+    fun findByTopicId(topic_id: Long) : AirportTopicEntity
 
 }

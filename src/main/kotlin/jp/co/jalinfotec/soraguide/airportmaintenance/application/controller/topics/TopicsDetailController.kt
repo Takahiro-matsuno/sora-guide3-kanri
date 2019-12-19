@@ -1,7 +1,11 @@
 package jp.co.jalinfotec.soraguide.airportmaintenance.application.controller.topics
 
+import jp.co.jalinfotec.soraguide.airportmaintenance.application.form.TopicsForm
+import jp.co.jalinfotec.soraguide.airportmaintenance.domain.`object`.User
 import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics.TopicsDbService
+import jp.co.jalinfotec.soraguide.airportmaintenance.domain.service.topics.TopicsFileService
 import jp.co.jalinfotec.soraguide.airportmaintenance.infrastructure.entity.TopicEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -9,7 +13,8 @@ import org.springframework.web.bind.annotation.*
 @Controller
 @RequestMapping("/topics/detail")
 class TopicsDetailController(
-        private val topicsService: TopicsDbService
+        private val topicsService: TopicsDbService,
+        private val topicsFileService: TopicsFileService
 ) {
 
     /**
@@ -44,22 +49,33 @@ class TopicsDetailController(
 
 
 
-        return "topics/topics-list"
+        return "user/user-home"
     }
 
     //　削除
     @PostMapping("/delete")
     fun deleteDetail(
+            @AuthenticationPrincipal user: User,
             topic: TopicEntity,
             model: Model
     ): String {
-        //airport_topicテーブルから削除
-        //topicテーブルから削除
-        //Azureストレージから対応する画像を削除
+        val companyId = user.getCompanyId()
+        val imageUrl = topic.topicImage
+        val array = imageUrl.split("/")
+        val filename = array[array.size -1]
+
+        //対象のtopicIdがcompanyIdに紐付いているかチェック
+        if(!companyId.equals(topicsService.getCompanyId(topic.topicId))) {
+            return "user/user-home"
+        }
 
 
+        //DBからtopicを削除
+        topicsService.deleteTopic(topic.topicId)
 
+        //Azureストレージから対象ファイルを削除
+        topicsFileService.deleteFile(filename,companyId)
 
-        return "topics/topics-list"
+        return "user/user-home"
     }
 }

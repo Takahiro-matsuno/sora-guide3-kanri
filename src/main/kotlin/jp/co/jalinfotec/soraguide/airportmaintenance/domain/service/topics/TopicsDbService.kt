@@ -33,6 +33,15 @@ class TopicsDbService(
     }
 
     /**
+     * topicIdから紐づくcompanyIdを取得する
+     */
+    fun getCompanyId(topicId: Long): String {
+        return airportTopicRepository.findByTopicId(topicId).airportId
+    }
+
+
+
+    /**
      * topicIdリストからtopic内容リストを取得する
      */
     fun getTopicList(topicIdList: ArrayList<Long>): ArrayList<TopicEntity> {
@@ -85,6 +94,20 @@ class TopicsDbService(
                 topicId = topicId
         )
         airportTopicRepository.save(airportTopicEntity)
+    }
+
+
+    /**
+     * topicを削除する
+     */
+    fun deleteTopic(topicId: Long) {
+        //airport_topicテーブルから削除
+        val airportTopicEntity = airportTopicRepository.findByTopicId(topicId)
+        airportTopicRepository.delete(airportTopicEntity)
+
+        //topicテーブルから削除
+        val topicEntity = topicRepository.findByTopicId(topicId)
+        topicRepository.delete(topicEntity)
     }
 
 }

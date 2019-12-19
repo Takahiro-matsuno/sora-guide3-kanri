@@ -9,5 +9,5 @@ import java.util.*
 interface TopicRepository: JpaRepository<TopicEntity, Long> {
 
     fun findByTopicImage(topicImage: String): TopicEntity
-
+    fun findByTopicId(topic_id: Long): TopicEntity
 }

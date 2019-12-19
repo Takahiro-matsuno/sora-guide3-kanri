@@ -33,7 +33,19 @@ class TopicsFileService {
         return blob.uri.toString()
     }
 
-    fun deleteFile() {
+    /**
+     * ファイルの削除
+     * arg1:ファイル名,arg2:空港会社ID
+     */
+    fun deleteFile(fileName:String,companyId: String) {
+        // AZ Storage Client作成
+        val storageAccount = CloudStorageAccount.parse(Environment.AZURE_STORAGE_KEY)
+        val blobClient = storageAccount.createCloudBlobClient()
+        //コンテナーを取得
+        val container = blobClient.getContainerReference(companyId)
 
+        //コンテナー内のファイルを削除
+        val blob = container.getBlockBlobReference(fileName)
+        blob.delete()
     }
 }
