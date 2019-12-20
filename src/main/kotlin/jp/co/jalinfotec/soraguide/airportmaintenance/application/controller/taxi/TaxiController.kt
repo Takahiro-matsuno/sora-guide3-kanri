@@ -99,9 +99,9 @@ class TaxiController(
     }
 
     /**
-     * タクシー会社削除画面
+     * タクシー会社詳細画面
      */
-    @GetMapping("/delete")
+    @GetMapping("/detail")
     fun getTaxiDelete(
         @RequestParam("id") id: String,
         model: Model
@@ -113,7 +113,7 @@ class TaxiController(
 
         model.addAttribute("taxiInfo",taxiInfo)
 
-        return "/taxi/taxi-delete"
+        return "/taxi/taxi-detail"
     }
 
     /**
@@ -122,7 +122,6 @@ class TaxiController(
     @PostMapping("/delete")
     fun postTaxiDelete(
             @AuthenticationPrincipal user: User,
-            //delList:削除対象の会社IDのリスト
             taxiInfo: TaxiInformationEntity,
             model: Model
     ): String {
@@ -130,5 +129,20 @@ class TaxiController(
         taxiService.deleteTaxi(taxiInfo.companyId)
         return "redirect:/taxi/list"
     }
+
+    /**
+     * タクシー会社更新処理
+     */
+    @PostMapping("/update")
+    fun postTaxiUpdate(
+            @AuthenticationPrincipal user: User,
+            taxiInfo: TaxiInformationEntity,
+            model: Model
+    ): String {
+
+        taxiService.updateTaxi(taxiInfo)
+        return "redirect:/taxi/list"
+    }
+
 
 }

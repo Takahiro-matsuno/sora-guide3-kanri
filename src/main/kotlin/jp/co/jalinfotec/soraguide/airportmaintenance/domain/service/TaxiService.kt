@@ -107,9 +107,14 @@ class TaxiService(
         airportTaxiList.forEach(){
             airportTaxiRepository.delete(it)
         }
-
     }
 
+    /**
+     * タクシー会社を更新する
+     */
+    fun updateTaxi(taxiInformationEntity: TaxiInformationEntity) {
+        taxiCompanyRepository.save(taxiInformationEntity)
+    }
 
 
 }
