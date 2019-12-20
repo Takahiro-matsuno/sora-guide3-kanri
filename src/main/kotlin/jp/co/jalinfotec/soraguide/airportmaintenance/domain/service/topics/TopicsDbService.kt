@@ -110,4 +110,12 @@ class TopicsDbService(
         topicRepository.delete(topicEntity)
     }
 
+    /**
+     * topicを更新する
+     */
+    fun updateTopic(topic: TopicEntity) {
+        topicRepository.save(topic)
+    }
+
+
 }

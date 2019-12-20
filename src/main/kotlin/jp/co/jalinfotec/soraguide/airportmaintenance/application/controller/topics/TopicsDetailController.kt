@@ -36,6 +36,7 @@ class TopicsDetailController(
     // 更新
     @PostMapping("/upd")
     fun putDetail(
+            @AuthenticationPrincipal user: User,
             topic: TopicEntity,
             model: Model
     ): String {
@@ -44,11 +45,7 @@ class TopicsDetailController(
         //画像は更新不可とする
         //画像を変えたい場合は、削除→新規で追加してもらう
 
-
-
-
-
-
+        topicsService.updateTopic(topic)
         return "user/user-home"
     }
 
@@ -68,11 +65,8 @@ class TopicsDetailController(
         if(!companyId.equals(topicsService.getCompanyId(topic.topicId))) {
             return "user/user-home"
         }
-
-
         //DBからtopicを削除
         topicsService.deleteTopic(topic.topicId)
-
         //Azureストレージから対象ファイルを削除
         topicsFileService.deleteFile(filename,companyId)
 

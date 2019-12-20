@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                     <th>トピック名</th>
-                    <td th:text="*{topicName}"></td>
+                   <td><input type="text" th:field="*{topicName}"/></td>
                 </tr>
                 <tr>
                     <th>画像</th>
@@ -32,12 +32,12 @@
                 <tr>
                     <th>URL</th>
                     <td>
-                        <a th:text="*{topicUrl}" th:href="*{topicUrl}"></a>
+                        <input type="text" th:field="*{topicUrl}"/>
                     </td>
                 </tr>
                 <tr>
                     <th>表示フラグ</th>
-                    <td th:text="*{display}"></td>
+                    <td><input type="text" th:field="*{display}"/></td>
                 </tr>
             </table>
             <input type="submit" th:formaction="@{/topics/detail/upd}" value="更新"/>
