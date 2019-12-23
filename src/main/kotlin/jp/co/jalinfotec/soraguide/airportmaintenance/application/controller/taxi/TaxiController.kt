@@ -126,6 +126,8 @@ class TaxiController(
             model: Model
     ): String {
 
+        //TODO ユーザーの空港に紐づくタクシー会社かチェックする
+
         taxiService.deleteTaxi(taxiInfo.companyId)
         return "redirect:/taxi/list"
     }
@@ -139,6 +141,9 @@ class TaxiController(
             taxiInfo: TaxiInformationEntity,
             model: Model
     ): String {
+
+        //TODO ユーザーの空港に紐づくタクシー会社かチェックする
+
 
         taxiService.updateTaxi(taxiInfo)
         return "redirect:/taxi/list"
