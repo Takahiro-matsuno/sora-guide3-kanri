@@ -117,4 +117,29 @@ class TaxiService(
     }
 
 
+    /***
+     * タクシー会社と空港の紐付きのチェックを行う
+     *
+     * タクシー会社が存在しない場合：
+     * タクシー会社と空港が紐付かない場合：
+     * タクシー会社と空港が紐付く場合：
+     */
+    fun checkTaxi(taxiCompanyId: String,airportId: String): Boolean {
+
+        //
+        val taxiList = airportTaxiRepository.findByAirportId(airportId)
+
+        if(taxiList.isEmpty()) {
+            return false
+        }else {
+            taxiList.forEach{
+                if(taxiCompanyId == it.taxiId) {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+
+
 }

@@ -126,9 +126,10 @@ class TaxiController(
             model: Model
     ): String {
 
-        //TODO ユーザーの空港に紐づくタクシー会社かチェックする
-
-        taxiService.deleteTaxi(taxiInfo.companyId)
+        //ユーザーの空港に紐づくタクシー会社かチェックする
+        if(taxiService.checkTaxi(taxiInfo.companyId,user.getCompanyId())) {
+            taxiService.deleteTaxi(taxiInfo.companyId)
+        }
         return "redirect:/taxi/list"
     }
 
@@ -142,10 +143,10 @@ class TaxiController(
             model: Model
     ): String {
 
-        //TODO ユーザーの空港に紐づくタクシー会社かチェックする
-
-
-        taxiService.updateTaxi(taxiInfo)
+        //ユーザーの空港に紐づくタクシー会社かチェックする
+        if(taxiService.checkTaxi(taxiInfo.companyId,user.getCompanyId())) {
+            taxiService.updateTaxi(taxiInfo)
+        }
         return "redirect:/taxi/list"
     }
 
