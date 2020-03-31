@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>そらガイド 空港管理-施設情報詳細</title>
+    <link th:href="@{/css/changePassword.css}" rel="stylesheet"/>
+    <link th:href="@{/css/topics-detail.css}" rel="stylesheet"/>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="content">
+        <form th:action="@{/facility/detail/delete}" method="post" th:object="${facility}">
+            <table class="table" rules="rows">
+                <tr>
+                    <th>施設ID</th>
+                    <td th:text="*{shopId}"></td>
+                    <input type="hidden" th:field="*{shopId}"/>
+                </tr>
+                <tr>
+                    <th>施設名</th>
+                    <td><input type="text" th:field="*{shopTitle}"/></td>
+                </tr>
+                <tr>
+                    <th>画像</th>
+                    <td><img th:src="*{shopImage}"></td>
+                    <input type="hidden" th:field="*{shopImage}"/>
+                </tr>
+                <tr>
+                    <th>開店時間</th>
+                    <td>
+                        <input type="text" th:field="*{openingHours}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>施設種別</th>
+                    <td><input type="text" th:field="*{shopCategory}"/></td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td><input type="text" th:field="*{shopTel}"/></td>
+                </tr>
+                <tr>
+                    <th>紹介文</th>
+                    <td><input type="text" th:field="*{shopText}"/></td>
+                </tr>
+                <tr>
+                    <th>場所</th>
+                    <td><input type="text" th:field="*{shopLocation}"/></td>
+                </tr>
+            </table>
+            <input type="submit" th:formaction="@{/facility/detail/upd}" value="更新"/>
+            <input type="submit" value="削除"/>
+        </form>
+    </div>
+</section>
+</body>
+</html>

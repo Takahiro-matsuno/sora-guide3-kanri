@@ -15,6 +15,11 @@
                         <a href="javascript:document.topics.submit()">トピック管理</a>
                     </li>
                 </form>
+                <form name="facility" role="form" th:action="@{/facility/list}" method="get">
+                    <li>
+                        <a href="javascript:document.facility.submit()">空港施設管理</a>
+                    </li>
+                </form>
                 <form name="companySetting" role="form" th:action="@{/company/setting}" method="get">
                     <li>
                         <a href="javascript:document.companySetting.submit()">会社設定</a>
